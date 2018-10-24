@@ -17,6 +17,7 @@ import br.com.alura.leilao.model.Leilao;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.*;
+import static org.mockito.Mockito.*;
 
 /**
  * Created by IanNagot on 23/10/2018
@@ -26,7 +27,7 @@ import static org.junit.Assert.*;
 public class ListaLeilaoAdapterTest {
 
     @Mock
-    private Context context = Mockito.mock(Context.class);
+    private Context context = mock(Context.class);
 
     @Spy
     private ListaLeilaoAdapter adapter = new ListaLeilaoAdapter(context);
@@ -36,13 +37,13 @@ public class ListaLeilaoAdapterTest {
 
         //MockitoAnnotations.initMocks(this); //Same as @RunWith(MockitoJUnitRunner.class)
 
-        Mockito.doNothing().when(adapter).atualizaLista();
+        doNothing().when(adapter).atualizaLista();
 
         adapter.atualiza(new ArrayList<>(Arrays.asList(
                 new Leilao("Console"),
                 new Leilao("Computador"))));
 
-        Mockito.verify(adapter).atualizaLista();
+        verify(adapter).atualizaLista();
 
         assertThat(adapter.getItemCount(), is(2));
     }
